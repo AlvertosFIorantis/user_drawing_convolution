@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+  <link rel="stylesheet" href="static/css/all.min.css">
+  <!-- font awsome cdn -->
+  <link rel="stylesheet" href="static/css/style_3.css?q=1280549780">
+  <link rel="stylesheet" href="static/css/animate.css">
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <title>Bootstrap</title>
+
+</head>
+
+
+<body>
+ 
+  <div class="wrap">
+    <div id="arrow-left" class="arrow"></div>
+    <div id="slider">
+     
+      <div class="slide slide3">
+        <div class="slide-content ">
+          <div class="container animated slideInDown" align="center">
+            <h1>Do you want to play a game with the "computer" ? </h1>
+            <hr>
+            <p>Draw a number from 0 - 9 and the computer will try to predict the number you have drawn</p>
+            <button class="btn btn-default btn-lg btn-primary" data-toggle="modal" data-target="#ModalCanvas">Draw
+              a
+              number
+            </button>
+            <!-- document.by id and everything after that up until "block" is used for the popup form -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="arrow-right" class="arrow"></div>
+  </div>
+  <!-- End of Show case -->
+
+ 
+  
+ 
+  <!-- End of Modal (pop up form) -->
+  <!-- Modal Canvas -->
+  <!-- Modal -->
+  <div class="modal fade " id="ModalCanvas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header section1">
+          <h5 class="modal-title " id="exampleModalLabel">Draw a number from 0 to 9</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+          <canvas id="canvas">
+
+          </canvas>
+        </div>
+        <div class="modal-footer section1">
+          <button id="clear" type="button" class="btn btn-primary">Clear</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button tpe="button" id="save-img" form="form_image" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/jquery.js"></script>
+  <script src="static/js/bootstrap.js"></script>
+  <script src="static/js/bootstrap-validate.js"></script>
+  <!-- need this tags for responive website withbootrsap -->
+
+  <script>
+    // select all the images that have the class slide and creates an array of all the elements and has an index 
+    let sliderImages = document.querySelectorAll(".slide"),
+      arrowLeft = document.querySelector("#arrow-left"),
+      arrowRight = document.querySelector("#arrow-right"),
+      current = 0;
+    // current represents what image are we on and by default is 0
+
+    // Clear all images
+    // every time we select a slide we want to clear all images so we can not see them
+    function reset() {
+      for (let i = 0; i < sliderImages.length; i++) {
+        sliderImages[i].style.display = "none";
+
+
+      }
+      // slide images is all the items with class sldie that we have selected above
+    }
+
+    // Init slider
+    function startSlide() {
+      reset();
+      // remove all images
+      sliderImages[0].style.display = "block";
+      // make only the first image visible
+    }
+
+    // Show prev
+    function slideLeft() {
+
+      reset();
+
+      // when select left arrow i want to go to the last image and then go backwards
+      sliderImages[current - 1].style.display = "block";
+
+
+
+      current--;
+    }
+
+    // Show next
+    function slideRight() {
+      reset();
+
+      sliderImages[current + 1].style.display = "block";
+
+
+      current++;
+    }
+
+    // Left arrow click
+    // event lissenter when i click on the left arrow. "arrow left" is the variable that i have define in the beggining of the javar script and selects all docuemts that have id off arrow left.
+    arrowLeft.addEventListener("click", function () {
+      if (current === 0) {
+        current = sliderImages.length;
+      }
+      slideLeft();
+
+    });
+
+    // Right arrow click
+    arrowRight.addEventListener("click", function () {
+      if (current === sliderImages.length - 1) {
+        current = -1;
+      }
+
+      slideRight();
+
+
+    });
+
+    startSlide();
+
+
+
+    // Canvas modal
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+
+    var radius = 5;
+
+    var dragging = false;
+    // variable to check if the mouse is pressed down
+
+    canvas.width = 500;
+
+    canvas.height = 500;
+
+    context.lineWidth = radius * 2;
+
+    var putPoint = function (e) {
+      if (dragging) {
+        context.lineTo(e.offsetX, e.offsetY);
+        context.stroke();
+        context.beginPath();
+        context.arc(e.offsetX, e.offsetY, radius, 0, Math.PI * 2);
+        // context.arc(e.offsetX, e.offsetY, radius, 0, Math.PI * 2);
+        context.fill();
+        context.beginPath();
+        context.moveTo(e.offsetX, e.offsetY);
+      }
+    };
+
+    var engage = function (e) {
+      dragging = true;
+      putPoint(e);
+    };
+
+    var disengage = function () {
+      dragging = false;
+      context.beginPath();
+    };
+
+    canvas.addEventListener("mousedown", engage);
+    canvas.addEventListener("mousemove", putPoint);
+    canvas.addEventListener("mouseup", disengage);
+
+    // bind event handler to clear button
+    document.getElementById("clear").addEventListener(
+      "click",
+      function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      },
+      false
+    );
+    // Save image to form
+    // document.getElementById('hidden_img').value =
+    //   (canvas.toDataURL('image/png'));
+    // console.log(document.getElementById('hidden_img').value)
+    // encodeURIComponent
+
+    // Save image
+    var saveButton = document.getElementById("save-img")
+
+    saveButton.addEventListener("click", saveImage);
+
+    function saveImage() {
+      var data = canvas.toDataURL();
+      var request = new XMLHttpRequest();
+
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          var response = request.responseText;
+          console.log(response)
+        }
+      }
+
+      request.open('POST', '/saveimg', true);
+      request.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      request.send('img=' + data);
+      console.log("Hi")
+    }
+
+
+
+
+  </script>
+  <!-- accordian function that helps with the drobdown in the about section -->
+
+</body>
+
+</html>

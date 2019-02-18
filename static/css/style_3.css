@@ -1,0 +1,219 @@
+.navbar {
+  background: #514f4f !important;
+  border: 0 !important;
+  font-size: 20px !important;
+}
+
+button span {
+  /*overwriting*/
+  color: #37efaf !important;
+  font-size: 25px;
+}
+/* button span is used to change the colour of the drobdown buttn */
+
+.navbar-brand {
+  font-size: 20px !important;
+  color: #37efaf !important;
+
+  font-family: sans-serif !important;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+}
+
+.btn-primary {
+  background-color: #37efaf !important;
+  border: 0 !important;
+}
+
+.btn-about {
+  background-color: #e2dcdc !important;
+  border: 0 !important;
+  color: #514f4f;
+  font-size: 17px !important;
+  border: 1px solid #37efaf !important;
+}
+
+/* change colour of bootstrap button */
+.btn-primary:hover {
+  opacity: 0.7;
+  /* change colour of button when hover */
+}
+
+.section1 {
+  background: #514f4f;
+  color: #37efaf;
+}
+
+.section2 {
+  background: #e2dcdc;
+  color: #514f4f;
+}
+
+.section:hover {
+  opacity: 0.9;
+}
+/* to make the section blink when we hover over it */
+/* Start the css for the slider and all the sections inside that i have the coment have the .wrap class */
+#slider,
+.wrap,
+.slide-content {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.wrap {
+  position: relative;
+}
+
+.slide {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.slide3 {
+  background-color:#514f4f;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* padding: 15%; */
+  /* add padding so that the arraows dont go above the content on mobile screen */
+}
+
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -35px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+#arrow-left {
+  border-width: 30px 40px 30px 0;
+  border-color: transparent #fff transparent transparent;
+  left: 0;
+  margin-left: 30px;
+}
+
+#arrow-right {
+  border-width: 30px 0 30px 40px;
+  border-color: transparent transparent transparent #fff;
+  right: 0;
+  margin-right: 30px;
+}
+
+.wrap h1 {
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.wrap hr {
+  width: 100px;
+  margin: auto;
+  border-width: 3px;
+  border-color: #37efaf;
+}
+/* hr is the line */
+
+.wrap p {
+  font-size: 16px;
+  padding-bottom: 20px;
+  color: #fff;
+}
+
+/* End of image slider */
+
+.section {
+  padding: 40px 0;
+}
+
+.section h2 {
+  padding: 0;
+  margin: 0;
+  /* remove padding and margin from h2 cause class .section has padding from the cc we added above */
+}
+
+.section .fa {
+  font-size: 50px;
+  /* to make bigger the "house" we added with font awsome */
+}
+
+.section img {
+  width: 100%;
+  /* make sure that the img in the about section stays in the container that we have predifined */
+}
+
+/* only for mobile view */
+@media only screen and (max-width: 600px) {
+  body {
+    margin-top: 190px;
+  }
+
+  .showcase {
+    height: 400px;
+    padding: 60px 0;
+  }
+
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15%;
+    /* add padding so that the arraows dont go above the content on mobile screen */
+  }
+}
+
+/* styling for accodrian */
+.card-header {
+  background-color: #e2dcdc !important;
+  font-size: 20px !important;
+  border: 1px solid #514f4f !important;
+}
+
+.card-link {
+  color: #514f4f;
+}
+
+.card-link:hover {
+  color: #37efaf;
+}
+
+.card-body {
+  background: #b7b0b0;
+  color: #514f4f;
+}
+
+/* end of styling for accordian */
+/* footer */
+.footer {
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+/* increasing the size of the fonts */
+.fa-brain,
+.fa-python,
+.fa-soundcloud,
+.fa-file-alt {
+  font-size: 50px;
+  padding-bottom: 10px;
+}
+
+/* TESTS!!!!! */
